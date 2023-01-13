@@ -17,7 +17,13 @@ const cartReducer = (state = INTIAL_STATE, action) => {
             ...state,
             cartItems: addItemToCart(state.cartItems, action.payload)
         }
-    }else {
+    } else if(action.type === cartActionTypes.REMOVE_ITEM) {
+        return {
+            ...state,
+            cartItems: state.cartItems.filter( item => item.id !== action.payload.id )
+        }
+
+    } else {
         return state;
     }
 }
