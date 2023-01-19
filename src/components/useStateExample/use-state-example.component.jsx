@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 
 
 const UseStateExample = () => { // Need to call the component in app.js when you want to check
-    const [user, setUser] = useState('sarthak');
-    const [searchQuery, setSearchQuery] = useState('Bharat');
+    const [user, setUser] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect( () => { // When set setUser,setSearchQuery then component get re-render and useEffect called.
-        const myFunc = async () => {
-           const response =  await fetch(`https://jsonplaceholder.typicode.com/users?username=${searchQuery}`);
-           const resJson = await response.json();
-           setUser(resJson[0]);
+        if(searchQuery.length > 0) {
+            const myFunc = async () => {
+                console.log("hello");
+                const response =  await fetch(`https://jsonplaceholder.typicode.com/users?username=${searchQuery}`);
+                const resJson = await response.json();
+                setUser(resJson[0]);
+            }
+            myFunc();
         }
-        myFunc();
-    });
+    },[searchQuery]);
 
     return(
         <div className="card">
