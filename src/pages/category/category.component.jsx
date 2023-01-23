@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import './category.styles.scss';
 
-import { connect } from "react-redux";
+import CollectionsContext from "../../contexts/collections/collections.context";
 
-const CategoryPage = ({ match, collections }) => {
+const CategoryPage = ({ match }) => {
     const categoryId = match.params.categoryId;
+    const collections = useContext(CollectionsContext);
     const COLLECTION_ID_MAP = {
         hats: 1,
         sneakers: 2,
@@ -29,8 +30,4 @@ const CategoryPage = ({ match, collections }) => {
     )
 }
 
-const mapStateToProps = ({ shop }) => ({
-    collections: shop.collections
-})
-
-export default connect(mapStateToProps)(CategoryPage);
+export default CategoryPage;

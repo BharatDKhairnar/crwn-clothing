@@ -1,23 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useContext } from 'react';
 
 import CollectionPreview from '../collection/preview-collection.component';
 
 import '../collection/preview-collection.styles.scss';
 
-const CollectionsOverview = ({ collections }) => (
-  <div className='collections-overview'>
+import CollectionsContext from '../../contexts/collections/collections.context';
+
+const CollectionsOverview = () => {
+    const collections = useContext(CollectionsContext);
+    return (
+    <div className='collections-overview'>
         {
             collections.map( result => (
                 <CollectionPreview key={result.id} title={result.title} items={result.items} />
             ))
         }
   </div>
-);
+)};
 
-const mapStateToProps = ({ shop }) => ({
-    collections: shop.collections
-})
-
-
-export default connect(mapStateToProps)(CollectionsOverview);
+export default CollectionsOverview;
